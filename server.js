@@ -2,6 +2,8 @@ const express = require('express');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const cors = require('cors');
+const path = require('path'); // Importar el módulo path
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -195,6 +197,13 @@ function findIcons($) {
 
     return icons;
 }
+
+// Servir la página HTML y el archivo JavaScript
+app.use(express.static(path.join(__dirname)));
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
