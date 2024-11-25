@@ -151,6 +151,7 @@ app.get('/fetch-url', async (req, res) => {
 
         res.json({ metaTags });
     } catch (error) {
+        console.error('Error fetching URL:', error);
         res.status(500).json({ error: error.message });
     }
 });
